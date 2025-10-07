@@ -87,3 +87,50 @@ exports.getcustomerbyEmail=async (req, res) => {
    }
 };
 
+exports.replaceCustomer = async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+    try{
+        const result = await CustomerCollection.findOneAndReplace({_id:id},data,{new:true});
+        res.status(200).send({
+            message: "Customer replaced successfully",
+            data: result
+        });
+    }catch(err){
+        res.status(500).send({
+            message : err
+        });
+    }
+};
+
+exports.updateCustomer = async (req, res) => {
+    const id = req.params.id;
+    const data = req.body;
+    try{
+        const result = await CustomerCollection.findByIdAndUpdate(id,data,{new:true});
+        res.status(200).send({
+            message: "Customer updated successfully",
+            data: result
+        });
+    } catch(err){
+        res.status(500).send({
+            message : err
+        });
+    }
+};
+
+exports.deleteCustomer = async (req, res) => {
+    const id = req.params.id;
+    try{
+        const result = await CustomerCollection.findByIdAndDelete(id);
+        res.status(200).send({
+            message: "Customer deleted successfully",
+            data: result
+        });
+    }
+    catch(err){
+        res.status(500).send({
+            message : err
+        });
+    }
+};
