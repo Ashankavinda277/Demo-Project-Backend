@@ -8,8 +8,11 @@ app.use(express.json());
 connect();
 
 const adminRoute = require('./routes/admin.route');
+const customerRoute = require('./routes/costomer.route');
 
 app.use('/api/admin', adminRoute);
+app.use('/api/customer', customerRoute);
+
 
 
 app.listen(process.env.PORT, () => {

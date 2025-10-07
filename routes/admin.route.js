@@ -14,4 +14,5 @@ router.get('/view/:address', adminController.viewAdminByAddress);
 router.patch('/update/:id', adminController.updateAdmin);
 router.delete('/delete/:id', adminController.deleteAdmin);
 
+
 module.exports = router;
