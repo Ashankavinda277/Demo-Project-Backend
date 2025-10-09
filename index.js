@@ -4,7 +4,6 @@ const connect = require('./config/db');
 
 const app = express();
 app.use(express.json());
-
 connect();
 
 const adminRoute = require('./routes/admin.route');
