@@ -8,9 +8,11 @@ connect();
 
 const adminRoute = require('./routes/admin.route');
 const customerRoute = require('./routes/costomer.route');
+const productRoute = require('./routes/product.route');
 
 app.use('/api/admin', adminRoute);
 app.use('/api/customer', customerRoute);
+app.use('/api/product', productRoute);
 
 
 
