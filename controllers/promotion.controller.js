@@ -1,5 +1,5 @@
 const PromotionCollection = require("../models/promotion.model");
-const {params} = require("../routes/promotion.route");
+const {params} = require("../routes/promotion.routes");
 
 exports.addPromotion = async (req, res) => {
    try{
