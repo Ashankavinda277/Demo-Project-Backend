@@ -8,6 +8,7 @@ connect();
 
 const adminRoute = require('./routes/admin.route');
 const customerRoute = require('./routes/costomer.route');
+const orderRoute = require('./routes/order.route');
 const productRoute = require('./routes/product.route');
 const promotionRoute = require('./routes/promotion.routes');
 
@@ -15,7 +16,7 @@ app.use('/api/admin', adminRoute);
 app.use('/api/customer', customerRoute);
 app.use('/api/product', productRoute);
 app.use('/api/promotion', promotionRoute);
-
+app.use('/api/order', orderRoute);
 
 
 app.listen(process.env.PORT, () => {
