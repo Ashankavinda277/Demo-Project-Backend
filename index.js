@@ -11,12 +11,14 @@ const customerRoute = require('./routes/costomer.route');
 const orderRoute = require('./routes/order.route');
 const productRoute = require('./routes/product.route');
 const promotionRoute = require('./routes/promotion.routes');
+const feedbackRoute = require('./routes/feedback.route');
 
 app.use('/api/admin', adminRoute);
 app.use('/api/customer', customerRoute);
 app.use('/api/product', productRoute);
 app.use('/api/promotion', promotionRoute);
 app.use('/api/order', orderRoute);
+app.use('/api/feedback',feedbackRoute);
 
 
 app.listen(process.env.PORT, () => {

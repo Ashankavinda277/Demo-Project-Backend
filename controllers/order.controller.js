@@ -1,4 +1,4 @@
-const orderCollection = require('../models/order.model');
+ const orderCollection = require('../models/order.model');
 const customerCollection = require('../models/customer.model');
 const productCollection = require('../models/product.models');
 
