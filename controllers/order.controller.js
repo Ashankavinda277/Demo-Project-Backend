@@ -46,7 +46,7 @@ exports.placeOrder = async (req, res) => {
 
 exports.viewAllOrders = async (req, res) => {
     try {
-        const orders = await orderCollection.find().populate('customerId').populate('items.productId');
+        const orders = await orderCollection.find();
         res.status(200).json({ message: "Orders retrieved successfully", orders });
     }catch (error) {
         res.status(500).json({ message: "Error retrieving orders", error });
