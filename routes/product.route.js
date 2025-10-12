@@ -4,7 +4,7 @@ const router = express.Router();
 const upload = require("../middleware/upload");
 
 const multer = require('multer');
-router.post('/add', productController.addProduct);
+router.post('/add', upload.single('image'), productController.addProduct);
 router.get('/get', productController.getProducts);
 router.get('/get/:id', productController.getProductsbyID);
 router.get('/get/name/:name', productController.getProductsbyName);

@@ -4,11 +4,18 @@ const { cloudinary } = require('../config/cloudinary');
 // Add Product with Image
 exports.addProduct = async (req, res) => {
     try {
+        console.log('Request body:', req.body);
+        console.log('Request file:', req.file);
+        
         const data = req.body;
+        
+        // If image is uploaded, add image URL and public ID
         if (req.file) {
             data.image = req.file.path;
             data.imagePublicId = req.file.filename;
         }
+
+        console.log('Data to save:', data);
 
         const newProduct = new ProductCollection(data);
         await newProduct.save();
@@ -18,6 +25,9 @@ exports.addProduct = async (req, res) => {
             data: newProduct
         });
     } catch (err) {
+        console.error('Error:', err);
+        
+        // If product creation fails, delete uploaded image
         if (req.file && req.file.filename) {
             await cloudinary.uploader.destroy(req.file.filename);
         }
