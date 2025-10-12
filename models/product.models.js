@@ -7,9 +7,17 @@ const productSchema = new mongoose.Schema({
     Product_Type: {type: String, required: true},
     Price: {type: Number, required: true},
     Description: {type: String, required: true},
-    Weight: {type: Double, required: true},
-    status: {type: String}
-}), timestamps = true;
+    Weight: {type: Number, required: true},
+    status: {type: String, default: 'active' },
+  image: { 
+        type: String,
+        default: 'https://via.placeholder.com/400'
+    },
+    imagePublicId: { 
+        type: String 
+    }
+      
+}, {timestamps : true});
 
 const Product = db.model('Product', productSchema);
 module.exports = Product;
