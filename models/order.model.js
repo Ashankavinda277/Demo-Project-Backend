@@ -10,7 +10,7 @@ const orderSchema = new mongoose.Schema({
             price:Number,
             quantity:Number,
             messageOnCake:String
-    },
+    }
 ],
 
     totalAmount: { type: Number, required: true },
