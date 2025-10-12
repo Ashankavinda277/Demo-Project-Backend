@@ -4,8 +4,8 @@ const { cloudinary } = require('../config/cloudinary');
 // Add Product with Image
 exports.addProduct = async (req, res) => {
     try {
-        console.log('Request body:', req.body);
-        console.log('Request file:', req.file);
+        // console.log('Request body:', req.body);
+        // console.log('Request file:', req.file);
         
         const data = req.body;
         
