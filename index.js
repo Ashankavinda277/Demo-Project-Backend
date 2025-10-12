@@ -1,9 +1,15 @@
 require('dotenv').config();
 const express = require('express');
 const connect = require('./config/db');
+const cors = require('cors')
 
 const app = express();
-app.use(express.json());
+
+app.use(cors(
+  origin = ["http://localhost:5173/"]
+))
+app.use(express.json())
+
 connect();
 
 const adminRoute = require('./routes/admin.route');
@@ -18,7 +24,7 @@ app.use('/api/customer', customerRoute);
 app.use('/api/product', productRoute);
 app.use('/api/promotion', promotionRoute);
 app.use('/api/order', orderRoute);
-app.use('/api/feedback',feedbackRoute);
+app.use('/api/feedback', feedbackRoute);
 
 
 app.listen(process.env.PORT, () => {
