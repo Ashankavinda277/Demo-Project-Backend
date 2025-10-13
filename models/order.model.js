@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-const db = mongoose.connection.useDb('cake-shop');
+const db = mongoose.connection.useDb('cake-shop', { useCache: true });
+require('./customer.model');
+require('./product.models');
 
 const orderSchema = new mongoose.Schema({
     customerId: { type: mongoose.Schema.Types.ObjectId, ref: 'Customer', required: true },
@@ -18,5 +20,6 @@ const orderSchema = new mongoose.Schema({
     deliveryAddress: { type: String, required: true },
 }, { timestamps: true });
 
-const Order = db.model('Order', orderSchema);
+
+const Order = db.models.Order || db.model('Order', orderSchema);
 module.exports = Order;

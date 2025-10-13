@@ -1,6 +1,7 @@
 const { Double } = require('bson');
 const mongoose = require('mongoose');
-const db = mongoose.connection.useDb('cake-shop');
+// use cached connection instance for the db
+const db = mongoose.connection.useDb('cake-shop', { useCache: true });
 
 const productSchema = new mongoose.Schema({
     Product_Name: {type: String, required: true},
@@ -9,15 +10,14 @@ const productSchema = new mongoose.Schema({
     Description: {type: String, required: true},
     Weight: {type: Number, required: true},
     status: {type: String, default: 'active' },
-  image: { 
+    image: { 
         type: String,
         default: 'https://via.placeholder.com/400'
     },
     imagePublicId: { 
         type: String 
     }
-      
 }, {timestamps : true});
 
-const Product = db.model('Product', productSchema);
+const Product = db.models.Product || db.model('Product', productSchema);
 module.exports = Product;
