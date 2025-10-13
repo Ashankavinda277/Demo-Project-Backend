@@ -69,39 +69,39 @@ exports.getPromotionbyName  = async (req, res) => {
    }
 };
 
-exports.getPromotionbyType  = async (req, res) => {              
-   const type = req.params.type;             
-   try{
-    const promotion = await PromotionCollection.find({Promotion_Type:type});
-    res.status(200).send({
-        message: "Promotion recieved successfully",
-        data: promotion
-    });
+// exports.getPromotionbyType  = async (req, res) => {              
+//    const type = req.params.type;             
+//    try{
+//     const promotion = await PromotionCollection.find({Promotion_Type:type});
+//     res.status(200).send({
+//         message: "Promotion recieved successfully",
+//         data: promotion
+//     });
 
-   }
-   catch(err){
-    res.status(500).send({
-        message : err
-    })
-   }
-};
+//    }
+//    catch(err){
+//     res.status(500).send({
+//         message : err
+//     })
+//    }
+// };
 
-exports.getPromotionbyStartDate  = async (req, res) => {              
-   const StartDate = req.params.StartDate;             
-   try{
-    const promotion = await PromotionCollection.find({Start_Date:StartDate});
-    res.status(200).send({
-        message: "Promotion recieved successfully",
-        data: promotion
-    });
+// exports.getPromotionbyStartDate  = async (req, res) => {              
+//    const StartDate = req.params.StartDate;             
+//    try{
+//     const promotion = await PromotionCollection.find({Start_Date:StartDate});
+//     res.status(200).send({
+//         message: "Promotion recieved successfully",
+//         data: promotion
+//     });
 
-   }
-   catch(err){
-    res.status(500).send({
-        message : err
-    })
-   }
-};
+//    }
+//    catch(err){
+//     res.status(500).send({
+//         message : err
+//     })
+//    }
+// };
 
 exports.getPromotionbyEndDate  = async (req, res) => {              
    const EndDate = req.params.EndDate;             
@@ -120,21 +120,21 @@ exports.getPromotionbyEndDate  = async (req, res) => {
    }
 };
 
-exports.replacePromotion = async (req, res) => {
-    const id = req.params.id;
-    const data = req.body;
-    try{
-        const result = await PromotionCollection.findOneAndReplace({_id:id},data,{new:true});
-        res.status(200).send({
-            message: "Promotion replaced successfully",
-            data: result
-        });
-    }catch(err){
-        res.status(500).send({
-            message : err
-        });
-    }
-};
+// exports.replacePromotion = async (req, res) => {
+//     const id = req.params.id;
+//     const data = req.body;
+//     try{
+//         const result = await PromotionCollection.findOneAndReplace({_id:id},data,{new:true});
+//         res.status(200).send({
+//             message: "Promotion replaced successfully",
+//             data: result
+//         });
+//     }catch(err){
+//         res.status(500).send({
+//             message : err
+//         });
+//     }
+// };
 
 exports.updatePromotion = async (req, res) => {
     const id = req.params.id;
