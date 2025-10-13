@@ -1,4 +1,8 @@
 
+const { Double } = require('bson');
+
+
+
 const mongoose = require('mongoose');
 const db = mongoose.connection.useDb('cake-shop');
 
@@ -10,7 +14,10 @@ const promotionSchema = new mongoose.Schema({
     End_Date: { type: Date, required: true },
     Description: { type: String, required: true },
     Weight: { type: String, required: true },
-    Icon: { type: String, required: true },
+     Icon: { 
+        type: String, 
+        default: '' 
+    },
     Current_Price: { type: Number, required: true }
 });
 const Promotion = db.model('Promotion', promotionSchema);
