@@ -1,3 +1,5 @@
+const offerCollection = require("../models/promotion.model"); // ADD THIS LINE
+
 const orderCollection = require("../models/order.model");
 const customerCollection = require("../models/customer.model");
 const productCollection = require("../models/product.models");
@@ -62,26 +64,78 @@ exports.placeOrder = async (req, res) => {
     const detailedItems = [];
     let subtotal = 0;
 
-    for (const item of items) {
-      const product = await productCollection.findById(item.productId);
+    // for (const item of items) {
+    //   const product = await productCollection.findById(item.productId);
 
-      if (!product) {
-        return res.status(404).json({
-          message: `Product with ID ${item.productId} not found`,
-        });
-      }
+    //   if (!product) {
+    //     return res.status(404).json({
+    //       message: `Product with ID ${item.productId} not found`,
+    //     });
+    //   }
 
-      const detailedItem = {
-        productId: product._id,
-        name: product.Product_Name,
-        price: product.Price,
-        quantity: item.quantity,
-        messageOnCake: item.messageOnCake || "",
-      };
+    //   const detailedItem = {
+    //     productId: product._id,
+    //     name: product.Product_Name,
+    //     price: product.Price,
+    //     quantity: item.quantity,
+    //     messageOnCake: item.messageOnCake || "",
+    //   };
 
-      detailedItems.push(detailedItem);
-      subtotal += product.Price * item.quantity;
+    //   detailedItems.push(detailedItem);
+    //   subtotal += product.Price * item.quantity;
+
+    // }
+for (const item of items) {
+  let product;
+  let detailedItem;
+
+  // CHECK IF IT'S AN OFFER OR PRODUCT
+  if (item.isOffer) {
+    // Search in offers collection
+    product = await offerCollection.findById(item.offerId);
+
+    if (!product) {
+      return res.status(404).json({
+        message: `Offer with ID ${item.offerId} not found`,
+      });
     }
+
+    detailedItem = {
+      offerId: product._id,                    // Store offer ID instead
+      name: product.Promotion_Name,            // Use Promotion_Name (offer field)
+      price: product.Discount_Price,           // Use Discount_Price (offer field)
+      quantity: item.quantity,
+      messageOnCake: item.messageOnCake || "",
+      isOffer: true,                           // NEW: Mark as offer
+    };
+
+    console.log("Added offer to order:", detailedItem);
+  } else {
+    // Search in products collection (original logic)
+    product = await productCollection.findById(item.productId);
+
+    if (!product) {
+      return res.status(404).json({
+        message: `Product with ID ${item.productId} not found`,
+      });
+    }
+
+    detailedItem = {
+      productId: product._id,                  // Store product ID
+      name: product.Product_Name,              // Use Product_Name (product field)
+      price: product.Price,                    // Use Price (product field)
+      quantity: item.quantity,
+      messageOnCake: item.messageOnCake || "",
+      isOffer: false,                          // NEW: Mark as product
+    };
+
+    console.log("Added product to order:", detailedItem);
+  }
+
+  detailedItems.push(detailedItem);
+  subtotal += product.Price * item.quantity || product.Discount_Price * item.quantity;
+}
+
 
     const deliveryFee = 250;
     const totalAmount = subtotal + deliveryFee;
